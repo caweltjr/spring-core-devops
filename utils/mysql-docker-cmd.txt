@@ -5,6 +5,8 @@
 - start docker service
 - start database
 
+#ON THE DATABASE SERVER *********************************
+
 #Command to start MySQL Docker Container
 
 sudo docker run -d --name prod_mysql \
@@ -27,11 +29,18 @@ CREATE DATABASE springguru
 
 grant all privileges on springguru.* to 'spring_guru_owner'@'localhost' identified by "GuruPassword";
 
+#ON THE APPLICATION SERVER *********************************************
 
 #Bash env
-export SPRING_DATASOURCE_URL=jdbc:mysql://52.91.138.232:3306/springguru
+export SPRING_DATASOURCE_URL=jdbc:mysql://52.53.246.241:3306/springguru
+
 export SPRING_DATASOURCE_USERNAME=spring_guru_owner
+export SPRING_DATASOURCE_USERNAME="ENC(ACW0rXGyHPxI0+p4h3DStdmQMFUCWhMF5+9DjJStuKc=)"
+
 export SPRING_DATASOURCE_PASSWORD="GuruPassword"
+export SPRING_DATASOURCE_PASSWORD="ENC(Ij3OP/MWsKdy6gLKfoIIdntSkfOLzb32)"
+
+export JASYPT_ENCRYPTOR_PASSWORD=password
 
 #User update
 DROP USER 'spring_guru_owner'@'localhost';
@@ -40,3 +49,5 @@ FLUSH PRIVILEGES;
 
 #run command
 java -jar ./spring-core-devops-0.0.1.jar --spring.jpa.hibernate.ddl-auto=update
+
+springguru.cqcjtbo0mv1x.us-west-1.rds.amazonaws.com:3306
